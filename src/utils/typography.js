@@ -11,6 +11,9 @@ Wordpress2016.overrideThemeStyles = () => {
 
 delete Wordpress2016.googleFonts;
 
+Wordpress2016.headerFontFamily = ['Montserrat', 'sans-serif'];
+Wordpress2016.bodyFontFamily = ['Montserrat', 'sans-serif'];
+
 const typography = new Typography(Wordpress2016);
 
 // Hot reload typography in development.
