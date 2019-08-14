@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "save-a-bee",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "Save our bees doing small things",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Christoph Benjamin Weber",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/kriswep/saveabee/issues"
   },
   "dependencies": {
     "gatsby": "^2.13.62",
@@ -38,7 +38,6 @@
   "devDependencies": {
     "prettier": "^1.18.2"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "keywords": [
     "gatsby"
   ],
@@ -46,7 +45,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/kriswep/saveabee.git"
   },
   "scripts": {
     "build": "gatsby build",
@@ -55,5 +54,9 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
