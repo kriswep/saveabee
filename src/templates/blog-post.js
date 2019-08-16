@@ -1,12 +1,53 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import ReactMarkdown from 'react-markdown';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { rhythm, scale } from '../utils/typography';
 
-class BlogPostTemplate extends React.Component {
+export const BlogPostTemplate = props => {
+  const { page } = props;
+
+  return (
+    <article>
+      <header>
+        <h1
+          style={{
+            marginTop: rhythm(1),
+            marginBottom: 0,
+          }}
+        >
+          {page.frontmatter.title}
+        </h1>
+        <p
+          style={{
+            ...scale(-1 / 5),
+            display: `block`,
+            marginBottom: rhythm(1),
+          }}
+        >
+          {page.frontmatter.date}
+        </p>
+      </header>
+      {page.isPreview ? (
+        <ReactMarkdown source={page.html} />
+      ) : (
+        <section dangerouslySetInnerHTML={{ __html: page.html }} />
+      )}
+
+      <hr
+        style={{
+          marginBottom: rhythm(1),
+        }}
+      />
+      <footer>{page.isPreview ? <></> : <Bio />} </footer>
+    </article>
+  );
+};
+
+class BlogPost extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
     const siteTitle = this.props.data.site.siteMetadata.title;
@@ -18,36 +59,7 @@ class BlogPostTemplate extends React.Component {
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
-        <article>
-          <header>
-            <h1
-              style={{
-                marginTop: rhythm(1),
-                marginBottom: 0,
-              }}
-            >
-              {post.frontmatter.title}
-            </h1>
-            <p
-              style={{
-                ...scale(-1 / 5),
-                display: `block`,
-                marginBottom: rhythm(1),
-              }}
-            >
-              {post.frontmatter.date}
-            </p>
-          </header>
-          <section dangerouslySetInnerHTML={{ __html: post.html }} />
-          <hr
-            style={{
-              marginBottom: rhythm(1),
-            }}
-          />
-          <footer>
-            <Bio />
-          </footer>
-        </article>
+        <BlogPostTemplate page={{ ...post, isPreview: false }} />
 
         <nav>
           <ul
@@ -80,7 +92,7 @@ class BlogPostTemplate extends React.Component {
   }
 }
 
-export default BlogPostTemplate;
+export default BlogPost;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
