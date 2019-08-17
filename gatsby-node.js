@@ -4,7 +4,6 @@ const { createFilePath } = require(`gatsby-source-filesystem`);
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const blogPost = path.resolve(`./src/templates/blog-post.js`);
   const result = await graphql(
     `
       {
@@ -14,11 +13,12 @@ exports.createPages = async ({ graphql, actions }) => {
         ) {
           edges {
             node {
+              id
               fields {
                 slug
               }
               frontmatter {
-                title
+                templateKey
               }
             }
           }
@@ -31,20 +31,36 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
-  // Create blog posts pages.
-  const posts = result.data.allMarkdownRemark.edges;
+  // Filter out files we don't create pages for
+  const postOrPage = result.data.allMarkdownRemark.edges.filter(edge => {
+    if (edge.node.frontmatter.templateKey === 'navbar') {
+      return false;
+    } else if (edge.node.frontmatter.templateKey === 'footer') {
+      return false;
+    } else {
+      return !Boolean(edge.node.fields.slug.match(/^\/meetups\/.*$/));
+    }
+  });
 
-  posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node;
-    const next = index === 0 ? null : posts[index - 1].node;
-
+  // Create pages.
+  postOrPage.forEach(edge => {
+    let component, pathName;
+    if (edge.node.frontmatter.templateKey === 'home-page') {
+      pathName = '/';
+      component = path.resolve(`src/pages/index.js`);
+    } else {
+      pathName = edge.node.frontmatter.path || edge.node.fields.slug;
+      component = path.resolve(
+        `src/templates/${String(edge.node.frontmatter.templateKey)}.js`,
+      );
+    }
+    const id = edge.node.id;
     createPage({
-      path: post.node.fields.slug,
-      component: blogPost,
+      path: pathName,
+      component,
+      // additional data can be passed via context, can be used in page Query
       context: {
-        slug: post.node.fields.slug,
-        previous,
-        next,
+        id,
       },
     });
   });
