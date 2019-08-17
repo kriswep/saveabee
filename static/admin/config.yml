@@ -24,3 +24,24 @@ collections:
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'pages'
+    label: 'Pages'
+    editor:
+      preview: false
+    files:
+      - file: 'content/pages/home/index.md'
+        label: 'Home'
+        name: 'home'
+        fields:
+          - {
+              label: 'Template Key',
+              name: 'templateKey',
+              widget: 'hidden',
+              default: 'home-page',
+            }
+          - {
+              label: 'Todo',
+              name: 'todo',
+              widget: 'string',
+              default: 'own fields',
+            }

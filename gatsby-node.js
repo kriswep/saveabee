@@ -42,7 +42,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   });
 
-  // Create pages.
+  // Create pages
   postOrPage.forEach(edge => {
     let component, pathName;
     if (edge.node.frontmatter.templateKey === 'home-page') {
