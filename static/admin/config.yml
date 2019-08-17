@@ -39,9 +39,55 @@ collections:
               widget: 'hidden',
               default: 'home-page',
             }
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Subtitle', name: 'subtitle', widget: 'string' }
           - {
-              label: 'Todo',
-              name: 'todo',
-              widget: 'string',
-              default: 'own fields',
+              label: 'Call to Actions',
+              name: 'callToActions',
+              required: true,
+              widget: 'object',
+              fields:
+                [
+                  {
+                    label: 'First CTA',
+                    name: 'firstCTA',
+                    required: true,
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Text', name: 'text', widget: 'string' },
+                        {
+                          label: 'Link Type',
+                          name: 'linkType',
+                          widget: 'select',
+                          options: ['internal', 'external'],
+                        },
+                        {
+                          label: 'Link URL',
+                          name: 'linkURL',
+                          widget: 'string',
+                          hint: 'Use a relative URL (e.g. /about) if the link is an internal link.',
+                        },
+                      ],
+                  },
+                ],
+            }
+          - {
+              label: 'SEO & Meta',
+              name: 'seo',
+              widget: 'object',
+              fields:
+                [
+                  {
+                    label: 'Browser Tab Title',
+                    name: 'browserTitle',
+                    widget: 'string',
+                  },
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  {
+                    label: 'Description',
+                    name: 'description',
+                    widget: 'string',
+                  },
+                ],
             }
