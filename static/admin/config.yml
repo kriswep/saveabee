@@ -40,7 +40,7 @@ collections:
               default: 'home-page',
             }
           - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Subtitle', name: 'subtitle', widget: 'string' }
+          - { label: 'Subtitle', name: 'subtitle', widget: 'markdown' }
           - {
               label: 'Call to Actions',
               name: 'callToActions',
