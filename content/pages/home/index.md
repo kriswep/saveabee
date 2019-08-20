@@ -1,9 +1,10 @@
 ---
 templateKey: home-page
 title: Know your bees?
-subtitle: >-
-  We love the nature.  We need flowers to live. We fertilize plants. We make
-  honey.
+subtitle: |-
+  We love the nature.  
+  We need flowers to live.  
+  We fertilize plants. We make honey.
 callToActions:
   firstCTA:
     linkType: internal
