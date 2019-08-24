@@ -1,56 +1,97 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import ReactMarkdown from 'react-markdown';
+import styled from 'styled-components';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { rhythm } from '../utils/typography';
+import { rhythm, scale } from '../utils/typography';
 
-class BlogIndex extends React.Component {
+const StyledMarkdown = styled(ReactMarkdown)`
+  & > p {
+    margin: 0;
+  }
+`;
+
+export const HomePageTemplate = props => {
+  const { page } = props;
+
+  return (
+    <section
+      css={`
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+      `}
+    >
+      <h1
+        css={`
+          ${scale(1)};
+          grid-column: 2 / 7;
+          font-style: normal;
+          font-weight: 800;
+          color: ${({ theme }) => theme.color.main.dark};
+          margin: 0;
+          padding-top: ${rhythm(9)};
+          letter-spacing: 0.05em;
+        `}
+      >
+        {page.title}
+      </h1>
+      <div
+        css={`
+          ${scale(0.82)};
+          line-height: 4.8rem;
+          grid-column: 2 / 7;
+          font-style: normal;
+          font-weight: 700;
+          padding: ${rhythm(3)} 0;
+        `}
+      >
+        <StyledMarkdown source={page.subtitle} />
+      </div>
+      <h3
+        css={`
+          grid-column: 2 / 7;
+          ${scale(0.55)};
+          font-style: normal;
+          font-weight: 700;
+          color: ${({ theme }) => theme.color.main.tint};
+          margin: 0;
+        `}
+      >
+        <Link
+          css={`
+            box-shadow: none;
+            text-decoration: none;
+            color: inherit;
+          `}
+          to={page.callToActions.firstCTA.linkURL}
+        >
+          {page.callToActions.firstCTA.text}
+        </Link>
+      </h3>
+    </section>
+  );
+};
+
+class HomePage extends React.Component {
   render() {
     const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
-    const posts = data.allMarkdownRemark.edges;
-
+    const pageData = data.allMarkdownRemark.edges;
+    console.log(pageData);
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="All posts" />
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug;
-          return (
-            <article key={node.fields.slug}>
-              <header>
-                <h3
-                  style={{
-                    marginBottom: rhythm(1 / 4),
-                  }}
-                >
-                  <Link
-                    css={`
-                      box-shadow: none;
-                    `}
-                    to={node.fields.slug}
-                  >
-                    {title}
-                  </Link>
-                </h3>
-                <small>{node.frontmatter.date}</small>
-              </header>
-              <section>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.description || node.excerpt,
-                  }}
-                />
-              </section>
-            </article>
-          );
-        })}
+        <SEO title={siteTitle} />
+        {pageData.length > 0 && (
+          <HomePageTemplate page={pageData[0].node.frontmatter} />
+        )}
       </Layout>
     );
   }
 }
 
-export default BlogIndex;
+export default HomePage;
 
 export const pageQuery = graphql`
   query {
@@ -60,19 +101,21 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
-      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { templateKey: { eq: "home-page" } } }
     ) {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            subtitle
             title
-            description
+            templateKey
+            callToActions {
+              firstCTA {
+                linkType
+                linkURL
+                text
+              }
+            }
           }
         }
       }

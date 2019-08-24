@@ -5,7 +5,7 @@ const theme = {
   baseLineHeight: 1.5,
   headerFontFamily: ['Montserrat', 'sans-serif'],
   bodyFontFamily: ['Montserrat', 'sans-serif'],
-  scaleRatio: 3.6,
+  scaleRatio: 4.8,
 };
 
 const typography = new Typography(theme);

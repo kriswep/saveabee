@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const theme = {
-  color: { main: { dark: '#3f3f3c', light: '#e3e300' } },
+  color: { main: { dark: '#3f3f3c', light: '#e3e300', tint: '#9d0000' } },
 };
 
 class Layout extends React.Component {
@@ -29,13 +29,14 @@ class Layout extends React.Component {
 
     if (location.pathname === rootPath) {
       header = (
-        <h1
+        <h2
           css={`
-            ${scale(1)};
+            ${scale(0.82)};
             font-family: overlock, sans-serif;
             font-style: normal;
             font-weight: 900;
             color: ${({ theme }) => theme.color.main.dark};
+            margin: 0;
           `}
         >
           <Link
@@ -48,7 +49,7 @@ class Layout extends React.Component {
           >
             {title}
           </Link>
-        </h1>
+        </h2>
       );
     }
     return (
