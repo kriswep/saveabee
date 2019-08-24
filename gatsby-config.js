@@ -3,7 +3,7 @@ module.exports = {
     title: `Save a Bee`,
     author: `Christoph Benjamin Weber`,
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://save-a-bee.netlify.com/`,
+    siteUrl: `https://saveabee.netlify.com/`,
     social: {
       twitter: `kriswep`,
     },
@@ -62,17 +62,10 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-      },
-    },
-    `gatsby-plugin-feed`,
-    {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Save a Bee`,
+        short_name: `SaveABee`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
@@ -80,7 +73,6 @@ module.exports = {
         icon: `content/assets/gatsby-icon.png`,
       },
     },
-    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
@@ -89,5 +81,6 @@ module.exports = {
         omitGoogleFont: true,
       },
     },
+    `gatsby-plugin-offline`,
   ],
 };

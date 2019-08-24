@@ -12,7 +12,7 @@ subtitle: |-
 callToActions:
   firstCTA:
     linkType: internal
-    linkURL: /todo
+    linkURL: /
     text: But we are in danger. Help us >
 seo:
   browserTitle: Save A Bee
