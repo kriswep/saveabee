@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Save A Bee`,
+    title: `Save a Bee`,
     author: `Christoph Benjamin Weber`,
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://save-a-bee.netlify.com/`,
@@ -86,6 +86,7 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+        omitGoogleFont: true,
       },
     },
   ],

@@ -1,73 +1,90 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { rhythm, scale } from '../utils/typography';
+
+const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+    font-size: 10px;
+    overflow: auto;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+  }
+`;
+
+const theme = {
+  color: { main: { dark: '#3f3f3c', light: '#e3e300' } },
+};
 
 class Layout extends React.Component {
   render() {
     const { location, title, children } = this.props;
     const rootPath = `${__PATH_PREFIX__}/`;
-    let header;
+    let header = null;
 
     if (location.pathname === rootPath) {
       header = (
         <h1
-          style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
-          }}
+          css={`
+            ${scale(1)};
+            font-family: overlock, sans-serif;
+            font-style: normal;
+            font-weight: 900;
+            color: ${({ theme }) => theme.color.main.dark};
+          `}
         >
           <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
+            css={`
+              box-shadow: none;
+              text-decoration: none;
+              color: inherit;
+            `}
             to={`/`}
           >
             {title}
           </Link>
         </h1>
       );
-    } else {
-      header = (
-        <h3
-          style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h3>
-      );
     }
     return (
-      <div
-        style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
-        <header>{header}</header>
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      <>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <div
+            css={`
+              min-height: 100vh;
+              min-width: 100vw;
+              background-color: ${({ theme }) => theme.color.main.light};
+              display: grid;
+              grid-template-columns: repeat(12, 1fr);
+              grid-template-rows: auto 1fr;
+            `}
+          >
+            <header
+              css={`
+                grid-row: 1 / 1;
+                grid-column: 2 / 12;
+                padding: ${rhythm(2)} 0;
+              `}
+            >
+              {header}
+            </header>
+            <main
+              css={`
+                grid-row: 2 / 2;
+                grid-column: 1 / 13;
+              `}
+            >
+              {children}
+            </main>
+          </div>
+        </ThemeProvider>
+      </>
     );
   }
 }
