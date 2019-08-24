@@ -27,7 +27,7 @@ collections:
   - name: 'pages'
     label: 'Pages'
     editor:
-      preview: false
+      preview: true
     files:
       - file: 'content/pages/home/index.md'
         label: 'Home'

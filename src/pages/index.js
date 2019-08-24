@@ -79,7 +79,7 @@ class HomePage extends React.Component {
     const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
     const pageData = data.allMarkdownRemark.edges;
-    console.log(pageData);
+
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title={siteTitle} />
