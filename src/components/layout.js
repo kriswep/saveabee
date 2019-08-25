@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import '../fonts/montserrat.css';
+import '../fonts/overlock.css';
 
 import { rhythm, scale } from '../utils/typography';
 
