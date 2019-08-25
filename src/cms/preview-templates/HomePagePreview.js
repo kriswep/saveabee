@@ -1,12 +1,12 @@
 import React from 'react';
-import { HomePageTemplate } from '../../pages/index';
 
-import Layout from '../../components/layout';
+import { HomePageTemplate } from '../../pages/index';
+import StylesheetInjector from '../StylesheetInjector';
 
 const BlogPostPreview = ({ entry, widgetFor }) => {
   const frontmatter = entry.getIn(['data']).toJS();
   return (
-    <Layout location={{ pathname: '/' }} title="Preview">
+    <StylesheetInjector location={{ pathname: '/' }} title="Preview">
       <HomePageTemplate
         page={{
           ...frontmatter,
@@ -14,7 +14,7 @@ const BlogPostPreview = ({ entry, widgetFor }) => {
           isPreview: true,
         }}
       />
-    </Layout>
+    </StylesheetInjector>
   );
 };
 
