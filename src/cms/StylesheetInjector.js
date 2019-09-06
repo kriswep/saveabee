@@ -10,7 +10,7 @@ const StylesheetInjector = props => {
     const iframe = document.querySelector('#nc-root iframe');
     const iframeHeadElem = iframe && iframe.contentDocument.head;
     setIframeRef(iframeHeadElem);
-  });
+  }, []);
 
   return (
     <>

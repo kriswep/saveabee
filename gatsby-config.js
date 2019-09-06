@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Save a Bee`,
     author: `Christoph Benjamin Weber`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `Save the bees.`,
     siteUrl: `https://saveabee.netlify.com/`,
     social: {
       twitter: `kriswep`,
